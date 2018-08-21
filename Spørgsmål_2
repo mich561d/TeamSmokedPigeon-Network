@@ -1,0 +1,4 @@
+Fejlen er: java.net.BindException: Address already in use
+
+Fejlen betyder at den valgte server socket (port) allerede er i brug.
+Man får fejlen når man opretter to forbindelser til den samme server socket.
