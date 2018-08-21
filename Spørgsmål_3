@@ -1,1 +1,6 @@
-
+        ServerSocket server = null;
+        try {
+            server = new ServerSocket(8080);
+        } catch (Exception e) {
+            server = new ServerSocket(0);
+        }
