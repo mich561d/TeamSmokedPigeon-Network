@@ -44,7 +44,6 @@ public class ServerMain {
     It still just tell the browser what time it is.
      */
     private static void picoServer02() throws Exception {
-        //Michael Due er en flot Due
         ServerSocket server = null;
         try {
             server = new ServerSocket(8080);
