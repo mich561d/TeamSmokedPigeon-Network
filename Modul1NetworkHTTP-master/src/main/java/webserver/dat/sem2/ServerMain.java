@@ -44,7 +44,12 @@ public class ServerMain {
     It still just tell the browser what time it is.
      */
     private static void picoServer02() throws Exception {
-        final ServerSocket server = new ServerSocket(0);
+        ServerSocket server = null;
+        try {
+            server = new ServerSocket(8080);
+        } catch (Exception e) {
+            server = new ServerSocket(0);
+        }
         System.out.println("Listening for connection on port " + server.getLocalPort() + "....");
         while (true) { // keep listening (as is normal for a server)
             try (Socket socket = server.accept()) {
