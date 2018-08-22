@@ -26,15 +26,11 @@ Her tager man så den første del af .split() metoden fra før og gemmer den i e
 6. if (resourceParts.length == 2) setQuery(resourceParts[1]);
 Her tjekker man om vi kun har en path eller om vi også har en query, og hvis vi har så bruge man set-metoden til at sætte query.
 
-Query er:
-A query is an inquiry into the database using the SELECT statement. 
-
-A query is used to extract data from the database in a readable format according to the user's request. 
-
-For instance, if you have an employee table, you might issue a SQL statement that returns the employee who is paid the most. 
-
-This request to the database for usable employee information is a typical query that can be performed in a relational database.
-
+Query er: 
+en Query(forespørgsel) er en undersøgelse i databasen ved hjælp af SELECT statement. 
+En Query(forespørgsel) henter en præcis data fra databasen i et læseligt format ud fra brugerens anvisninger.
+For eksempel, har du en medarbejder oversigt, hvor du sender et SQL statement, der retunere den medarbejder der tjener mest.
+Denne efterspørgsel til databasen for brugbar medarbejder information er en typisk Query(forespørgsel) der kan udføres i en database relation.
 
 7. protocol = parts[2];
 Her bliver den sidste del af den første .split() metoden brugt.
