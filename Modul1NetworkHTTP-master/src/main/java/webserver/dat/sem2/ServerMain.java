@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 public class ServerMain {
 
     public static void main(String[] args) throws Exception {
-        picoServer06();
+        picoServer04();
     }
 
     /*
