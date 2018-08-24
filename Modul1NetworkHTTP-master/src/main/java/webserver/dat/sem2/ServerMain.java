@@ -236,6 +236,19 @@ public class ServerMain {
         res = res.replace("$2", String.valueOf(fi + si));
         return res;
     }
+        private static String multiplyOurNumbers(HttpRequest req) {
+        String first = req.getParameter("firstnumber");
+        String second = req.getParameter("secondnumber");
+        int fi = Integer.parseInt(first);
+        int si = Integer.parseInt(second);
+        String third = String.valueOf(fi * si);
+        String res = generateHTML("pages/result.tmpl", first, second, third);
+
+        res = res.replace("$0", first);
+        res = res.replace("$1", second);
+        res = res.replace("$2", String.valueOf(fi + si));
+        return res;
+    }
 
     private static String generateHTML(String file, String a, String b, String c) {
         String res = null;
