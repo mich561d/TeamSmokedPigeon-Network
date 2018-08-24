@@ -250,4 +250,18 @@ public class ServerMain {
         res = res.replace("$2", c);
         return res;
     }
+    
+        private static String generateHTML(String file, String ... a) {
+        String res = null;
+        System.out.println(file);
+        try {
+            res = getResourceFileContents(file);
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+        res = res.replace("$0", a);
+        res = res.replace("$1", b);
+        res = res.replace("$2", c);
+        return res;
+    }
 }
