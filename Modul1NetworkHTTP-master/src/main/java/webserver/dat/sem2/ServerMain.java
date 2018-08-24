@@ -228,17 +228,19 @@ public class ServerMain {
         String second = req.getParameter("secondnumber");
         int fi = Integer.parseInt(first);
         int si = Integer.parseInt(second);
-        String res = null;
-        try {
-            res = getResourceFileContents("pages/result.tmpl");
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
+        String third = String.valueOf(fi + si);
+        String res = generateHTML(req.getPath(), first, second, third);
+//        String res = null;
+//        try {
+//            res = getResourceFileContents("pages/result.tmpl");
+//        } catch (Exception e) {
+//            System.out.println("Error");
+//        }
 //        String res = RES;
-
-        res = res.replace("$0", first);
-        res = res.replace("$1", second);
-        res = res.replace("$2", String.valueOf(fi + si));
+//
+//        res = res.replace("$0", first);
+//        res = res.replace("$1", second);
+//        res = res.replace("$2", String.valueOf(fi + si));
         return res;
     }
 
@@ -254,4 +256,17 @@ public class ServerMain {
 //            + "        <a href=\"adding.html\">Læg to andre tal sammen</a>\n"
 //            + "    </body>\n"
 //            + "</html>\n";
+    
+    private static String generateHTML(String file, String a, String b, String c) {
+        String res = null;
+        try {
+            res = getResourceFileContents("pages/result.tmpl");
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+        res = res.replace("$0", a);
+        res = res.replace("$1", b);
+        res = res.replace("$2", c);
+        return res;
+    }
 }
