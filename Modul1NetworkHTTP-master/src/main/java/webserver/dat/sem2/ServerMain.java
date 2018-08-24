@@ -236,7 +236,7 @@ public class ServerMain {
         res = res.replace("$2", String.valueOf(fi + si));
         return res;
     }
-    
+
     private static String generateHTML(String file, String a, String b, String c) {
         String res = null;
         System.out.println(file);
@@ -250,8 +250,8 @@ public class ServerMain {
         res = res.replace("$2", c);
         return res;
     }
-    
-        private static String generateHTML(String file, String ... a) {
+
+    private static String generateHTML(String file, String... a) {
         String res = null;
         System.out.println(file);
         try {
@@ -259,9 +259,12 @@ public class ServerMain {
         } catch (Exception e) {
             System.out.println("Error");
         }
-        res = res.replace("$0", a);
-        res = res.replace("$1", b);
-        res = res.replace("$2", c);
+        System.out.println(a.length);
+        int count = 0;
+        for (String string : a) {
+            res = res.replace("$".concat(String.valueOf(count)), string);
+            count++;
+        }
         return res;
     }
 }
