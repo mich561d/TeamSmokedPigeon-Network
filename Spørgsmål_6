@@ -1,0 +1,42 @@
+Forskellen på parametre og headers er:
+
+De er designet til forskellige formål. Headers holder meta info, parametre holder aktuel data.
+Headers kan ikke holde Unicode indhold.
+Men parametre kan godt holde Unicode indhold.
+Web serveren vil automatisk dekode parametre, men det gælder ikke headers.
+
+De 7 første linjer:
+
+1. String[] parts = readLine(in).split(" ");
+Bruger .split() metoden for at kunne dele indholdet op.
+
+2. if (parts.length != 3) throw new IOException("Bad request");
+Tjekker at inputet er korrekt, for ellers vil det give problemer.
+
+3. method = parts[0].toLowerCase();
+Tager den første del af input og sætter det hele i små bogstaver.
+
+4. String[] resourceParts = parts[1].split("\\?", 2);
+Her bliver anden del af inputet splittet endnu engang, denne gang er .split() metoden blevet en smule mere advanceret,
+da den nu har fået en parameter mere i metoden, det nye parameter sætter en begrænsning så vores split deler den op i 2.
+
+5. path = resourceParts[0];
+Her tager man så den første del af .split() metoden fra før og gemmer den i en ny variable.
+
+6. if (resourceParts.length == 2) setQuery(resourceParts[1]);
+Her tjekker man om vi kun har en path eller om vi også har en query, og hvis vi har så bruge man set-metoden til at sætte query.
+
+Query er: 
+en Query(forespørgsel) er en undersøgelse i databasen ved hjælp af SELECT statement. 
+En Query(forespørgsel) henter en præcis data fra databasen i et læseligt format ud fra brugerens anvisninger.
+For eksempel, har du en medarbejder oversigt, hvor du sender et SQL statement, der retunere den medarbejder der tjener mest.
+Denne efterspørgsel til databasen for brugbar medarbejder information er en typisk Query(forespørgsel) der kan udføres i en database relation.
+
+7. protocol = parts[2];
+Her bliver den sidste del af den første .split() metoden brugt.
+
+Hvorfor er det første bedre end det andet:
+Fordi at getContentType() kan være null, og man kan ikke bruge .equals() metoden på null. 
+Derfor kan man få fejl ved brug, derfor gør man det omvendt, så man ikke få fejl.
+"string".equals(null) = false
+null.equals("string") = fejl
