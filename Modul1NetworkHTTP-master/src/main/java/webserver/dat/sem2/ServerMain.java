@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 public class ServerMain {
 
     public static void main(String[] args) throws Exception {
-        picoServer02();
+        picoServer06();
     }
 
     /*
@@ -174,7 +174,7 @@ public class ServerMain {
         while (true) { // keep listening (as is normal for a server)
             Socket socket = server.accept();;
             try {
-                System.out.println("---- reqno: " + count + " ----");
+                System.out.println("---- reqno: " + count++ + " ----");
                 HttpRequest req = new HttpRequest(socket.getInputStream());
                 String path = req.getPath();
                 if (path.endsWith(".html") || path.endsWith(".txt")) {
@@ -185,6 +185,9 @@ public class ServerMain {
                     String res = "";
                     switch (path) {
                         case "/addournumbers":
+                            res = addOurNumbers(req);
+                            break;
+                        case "/localhost:8080/addournumbers":
                             res = addOurNumbers(req);
                             break;
                         default:
@@ -225,24 +228,30 @@ public class ServerMain {
         String second = req.getParameter("secondnumber");
         int fi = Integer.parseInt(first);
         int si = Integer.parseInt(second);
-        String res = RES;
+        String res = null;
+        try {
+            res = getResourceFileContents("pages/result.tmpl");
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+//        String res = RES;
+
         res = res.replace("$0", first);
         res = res.replace("$1", second);
         res = res.replace("$2", String.valueOf(fi + si));
         return res;
     }
 
-    private static String RES = "<!DOCTYPE html>\n"
-            + "<html lang=\"da\">\n"
-            + "    <head>\n"
-            + "        <title>Adding form</title>\n"
-            + "        <meta charset=\"UTF-8\">\n"
-            + "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-            + "    </head>\n"
-            + "    <body>\n"
-            + "        <h1>Super: Resultatet af $0 + $1 blev: $2</h1>\n"
-            + "        <a href=\"adding.html\">Læg to andre tal sammen</a>\n"
-            + "    </body>\n"
-            + "</html>\n";
-
+//    private static String RES = "<!DOCTYPE html>\n"
+//            + "<html lang=\"da\">\n"
+//            + "    <head>\n"
+//            + "        <title>Adding form</title>\n"
+//            + "        <meta charset=\"UTF-8\">\n"
+//            + "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+//            + "    </head>\n"
+//            + "    <body>\n"
+//            + "        <h1>Super: Resultatet af $0 + $1 blev: $2</h1>\n"
+//            + "        <a href=\"adding.html\">Læg to andre tal sammen</a>\n"
+//            + "    </body>\n"
+//            + "</html>\n";
 }
