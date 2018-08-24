@@ -50,6 +50,7 @@ public class ServerMain {
         } catch (Exception e) {
             server = new ServerSocket(0);
         }
+        //ServerSocket server = new ServerSocket(8080);
         System.out.println("Listening for connection on port " + server.getLocalPort() + "....");
         while (true) { // keep listening (as is normal for a server)
             try (Socket socket = server.accept()) {
