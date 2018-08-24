@@ -236,10 +236,6 @@ public class ServerMain {
         int si = Integer.parseInt(second);
         String third = String.valueOf(fi + si);
         String res = generateHTML("pages/result.tmpl", first, second, third);
-
-        res = res.replace("$0", first);
-        res = res.replace("$1", second);
-        res = res.replace("$2", String.valueOf(fi + si));
         return res;
     }
 
@@ -250,10 +246,6 @@ public class ServerMain {
         int si = Integer.parseInt(second);
         String third = String.valueOf(fi * si);
         String res = generateHTML("pages/result.tmpl", first, second, third);
-
-        res = res.replace("$0", first);
-        res = res.replace("$1", second);
-        res = res.replace("$2", String.valueOf(fi + si));
         return res;
     }
 
