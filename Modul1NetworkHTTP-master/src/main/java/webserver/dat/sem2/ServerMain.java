@@ -229,38 +229,19 @@ public class ServerMain {
         int fi = Integer.parseInt(first);
         int si = Integer.parseInt(second);
         String third = String.valueOf(fi + si);
-        String res = generateHTML(req.getPath(), first, second, third);
-//        String res = null;
-//        try {
-//            res = getResourceFileContents("pages/result.tmpl");
-//        } catch (Exception e) {
-//            System.out.println("Error");
-//        }
-//        String res = RES;
-//
-//        res = res.replace("$0", first);
-//        res = res.replace("$1", second);
-//        res = res.replace("$2", String.valueOf(fi + si));
+        String res = generateHTML("pages/result.tmpl", first, second, third);
+
+        res = res.replace("$0", first);
+        res = res.replace("$1", second);
+        res = res.replace("$2", String.valueOf(fi + si));
         return res;
     }
-
-//    private static String RES = "<!DOCTYPE html>\n"
-//            + "<html lang=\"da\">\n"
-//            + "    <head>\n"
-//            + "        <title>Adding form</title>\n"
-//            + "        <meta charset=\"UTF-8\">\n"
-//            + "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-//            + "    </head>\n"
-//            + "    <body>\n"
-//            + "        <h1>Super: Resultatet af $0 + $1 blev: $2</h1>\n"
-//            + "        <a href=\"adding.html\">Læg to andre tal sammen</a>\n"
-//            + "    </body>\n"
-//            + "</html>\n";
     
     private static String generateHTML(String file, String a, String b, String c) {
         String res = null;
+        System.out.println(file);
         try {
-            res = getResourceFileContents("pages/result.tmpl");
+            res = getResourceFileContents(file);
         } catch (Exception e) {
             System.out.println("Error");
         }
