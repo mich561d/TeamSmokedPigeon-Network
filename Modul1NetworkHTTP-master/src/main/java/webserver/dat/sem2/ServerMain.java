@@ -190,6 +190,12 @@ public class ServerMain {
                         case "/localhost:8080/addournumbers":
                             res = addOurNumbers(req);
                             break;
+                        case "/multiplyournumbers":
+                            res = multiplyOurNumbers(req);
+                            break;
+                        case "/localhost:8080/multiplyournumbers":
+                            res = multiplyOurNumbers(req);
+                            break;
                         default:
                             res = "Unknown path: " + path;
                     }
@@ -236,7 +242,8 @@ public class ServerMain {
         res = res.replace("$2", String.valueOf(fi + si));
         return res;
     }
-        private static String multiplyOurNumbers(HttpRequest req) {
+
+    private static String multiplyOurNumbers(HttpRequest req) {
         String first = req.getParameter("firstnumber");
         String second = req.getParameter("secondnumber");
         int fi = Integer.parseInt(first);
