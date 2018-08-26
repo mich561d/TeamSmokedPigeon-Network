@@ -268,14 +268,14 @@ public class ServerMain {
         System.out.println(file);
         try {
             res = getResourceFileContents(file);
+            System.out.println(a.length);
+            int count = 0;
+            for (String string : a) {
+                res = res.replace("$".concat(String.valueOf(count)), string);
+                count++;
+            }
         } catch (Exception e) {
             System.out.println("Error");
-        }
-        System.out.println(a.length);
-        int count = 0;
-        for (String string : a) {
-            res = res.replace("$".concat(String.valueOf(count)), string);
-            count++;
         }
         return res;
     }
