@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This is a sample html file used to confirm that our server 
-can read from the resource directory
--->
 <html lang="da">
     <head>
         <title>Adding form</title>
@@ -10,14 +6,15 @@ can read from the resource directory
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Super - vi skal lige lægge to tal sammen</h1>
-        <form method="GET" action="/addournumbers">
+        <h1>Super - vi skal lige lege med at regne på to tal (B)</h1>
+        <form method="GET" action="/calculate">
             Første tal:<br>
             <input type="text" name="firstnumber" value="17"><br>
             Andet tal:<br>
             <input type="text" name="secondnumber" value="13"><br><br>
-            <input type="submit" value="Add">
-            <!--$res-->
+            <input type="submit" name= "actionKind" value="Add">
+            <input type="submit" name= "actionKind" value="Mul">
         </form>
     </body>
 </html>
+

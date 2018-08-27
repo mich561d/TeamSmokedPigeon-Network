@@ -5,27 +5,18 @@ can read from the resource directory
 -->
 <html lang="da">
     <head>
-        <title>Calculation form</title>
+        <title>Adding form</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Our awesome calculator!</h1>
-        <form method="GET" action="addournumbers">
-            First number:<br>
-            <input type="text" name="firstnumber" value="45"><br>
-            Second number:<br>
-            <input type="text" name="secondnumber" value="24"><br><br>
+        <h1>Super - vi skal lige lægge to tal sammen</h1>
+        <form method="GET" action="/addournumbers">
+            Første tal:<br>
+            <input type="text" name="firstnumber" value="17"><br>
+            Andet tal:<br>
+            <input type="text" name="secondnumber" value="13"><br><br>
             <input type="submit" value="Add">
-            <!--$res-->
-        </form>
-        <br>
-        <form method="GET" action="multiplyournumbers">
-            First number:<br>
-            <input type="text" name="firstnumber" value="45"><br>
-            Second number:<br>
-            <input type="text" name="secondnumber" value="24"><br><br>
-            <input type="submit" value="Multiply">
             <!--$res-->
         </form>
     </body>
