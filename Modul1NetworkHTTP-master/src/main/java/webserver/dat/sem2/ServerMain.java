@@ -135,7 +135,7 @@ public class ServerMain {
         System.out.println( "Listening for connection on port 8080 ...." );
         String root = "pages";
         while ( true ) { // keep listening (as is normal for a server)
-            Socket socket = server.accept();;
+            Socket socket = server.accept();
             try {
                 System.out.println( "-----------------" );
                 HttpRequest req = new HttpRequest( socket.getInputStream() );
@@ -167,7 +167,7 @@ public class ServerMain {
         String root = "pages";
         int count = 0;
         while ( true ) { // keep listening (as is normal for a server)
-            Socket socket = server.accept();;
+            Socket socket = server.accept();
             try {
                 System.out.println( "---- reqno: " + count + " ----" );
                 HttpRequest req = new HttpRequest( socket.getInputStream() );
@@ -212,7 +212,7 @@ public class ServerMain {
         String root = "pages";
         int count = 0;
         while ( true ) { // keep listening (as is normal for a server)
-            Socket socket = server.accept();;
+            Socket socket = server.accept();
             try {
                 System.out.println( "---- reqno: " + count + " ----" );
                 HttpRequest req = new HttpRequest( socket.getInputStream() );
@@ -260,7 +260,7 @@ public class ServerMain {
         String root = "pages";
         int count = 0;
         while ( true ) { // keep listening (as is normal for a server)
-            Socket socket = server.accept();;
+            Socket socket = server.accept();
             try {
                 System.out.println( "---- reqno: " + count + " ----" );
                 HttpRequest req = new HttpRequest( socket.getInputStream() );
