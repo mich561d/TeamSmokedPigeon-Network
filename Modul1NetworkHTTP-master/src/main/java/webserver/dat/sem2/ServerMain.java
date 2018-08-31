@@ -203,23 +203,17 @@ public class ServerMain {
             System.out.println("---- reqno: " + count + " ----");
             HttpRequest req = new HttpRequest(socket.getInputStream());
             String path = req.getPath();
-            if (path.endsWith(".html") || path.endsWith(".txt")) {
-                String html = getResourceFileContents(root + path);
-                String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + html;
-                socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
-            } else {
-                workingJack.submit(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            pageHandler06(path, req, socket);
-                        } catch (IOException e) {
-                            e.getMessage();
-                        }
+            workingJack.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        ifOo(path, root, socket, workingJack, req);
+                    } catch (Exception e) {
+                        e.getMessage();
                     }
-                });
+                }
+            });
 
-            }
         } catch (Exception ex) {
             String httpResponse = "HTTP/1.1 500 Internal error\r\n\r\n"
                     + "UUUUPS: " + ex.getLocalizedMessage();
@@ -228,6 +222,26 @@ public class ServerMain {
             if (socket != null) {
                 socket.close();
             }
+        }
+    }
+
+    private static void ifOo(String path, String root, Socket socket, ExecutorService workingJack, HttpRequest req) throws Exception {
+        if (path.endsWith(".html") || path.endsWith(".txt")) {
+            String html = getResourceFileContents(root + path);
+            String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + html;
+            socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
+        } else {
+            workingJack.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        pageHandler06(path, req, socket);
+                    } catch (IOException e) {
+                        e.getMessage();
+                    }
+                }
+            });
+
         }
     }
 
