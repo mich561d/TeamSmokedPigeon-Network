@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 public class ServerMain {
 
     public static void main(String[] args) throws Exception {
-        picoServer05();
+        picoServer06();
         //System.out.println( RES );
     }
 
@@ -184,40 +184,64 @@ public class ServerMain {
         System.out.println("Listening for connection on port 8080 ....");
         String root = "pages";
         int count = 0;
+        ExecutorService workingJack = Executors.newFixedThreadPool(17);
         while (true) { // keep listening (as is normal for a server)
             Socket socket = server.accept();
             try {
-                System.out.println("---- reqno: " + count + " ----");
-                HttpRequest req = new HttpRequest(socket.getInputStream());
-                String path = req.getPath();
-                if (path.endsWith(".html") || path.endsWith(".txt")) {
-                    String html = getResourceFileContents(root + path);
-                    String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + html;
-                    socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
-                } else {
-                    String res = "";
-                    switch (path) {
-                        case "/addournumbers":
-                            res = addOurNumbers(req);
-                            break;
-                        default:
-                            res = "Unknown path: " + path;
-                    }
-                    String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + res;
-                    socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
-                }
-            } catch (Exception ex) {
-                String httpResponse = "HTTP/1.1 500 Internal error\r\n\r\n"
-                        + "UUUUPS: " + ex.getLocalizedMessage();
-                socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
-            } finally {
-                if (socket != null) {
-                    socket.close();
-                }
+                makeResponse06(count, socket, root, workingJack);
+                count++;
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
-            count++;
+
         }
 //        System.out.println( getFile("adding.html") );
+    }
+
+    public static void makeResponse06(int count, Socket socket, String root, ExecutorService workingJack) throws IOException {
+        try {
+            System.out.println("---- reqno: " + count + " ----");
+            HttpRequest req = new HttpRequest(socket.getInputStream());
+            String path = req.getPath();
+            if (path.endsWith(".html") || path.endsWith(".txt")) {
+                String html = getResourceFileContents(root + path);
+                String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + html;
+                socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
+            } else {
+                workingJack.submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            pageHandler06(path, req, socket);
+                        } catch (IOException e) {
+                            e.getMessage();
+                        }
+                    }
+                });
+
+            }
+        } catch (Exception ex) {
+            String httpResponse = "HTTP/1.1 500 Internal error\r\n\r\n"
+                    + "UUUUPS: " + ex.getLocalizedMessage();
+            socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
+        } finally {
+            if (socket != null) {
+                socket.close();
+            }
+        }
+    }
+
+    public static void pageHandler06(String path, HttpRequest req, Socket socket) throws IOException {
+        String res = "";
+        switch (path) {
+            case "/addournumbers":
+                res = addOurNumbers(req);
+                break;
+            default:
+                res = "Unknown path: " + path;
+        }
+        String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + res;
+        socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
     }
 
     /*
